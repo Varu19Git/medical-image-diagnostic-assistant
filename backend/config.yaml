@@ -1,0 +1,28 @@
+# Medical AI Diagnostics System Configuration
+
+# App settings
+app:
+  name: Medical AI Diagnostics
+  description: AI-powered medical image diagnostic system
+  version: 0.1.0
+  debug: true
+  secret_key: "51119abc123xyz789secure" # More secure secret key
+
+# Authentication
+auth:
+  token_expiry_minutes: 30
+  refresh_token_expiry_days: 7
+  password_min_length: 8
+  
+# Test users (only for development)
+test_users:
+  - username: doctor1
+    email: doctor@example.com
+    password: password123
+    full_name: Dr. One
+    role: doctor
+  - username: admin1
+    email: admin@example.com
+    password: password123
+    full_name: Admin One
+    role: admin

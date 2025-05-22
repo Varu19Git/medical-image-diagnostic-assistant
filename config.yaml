@@ -1,0 +1,76 @@
+# Medical AI Diagnostics System Configuration
+
+# App settings
+app:
+  name: Medical AI Diagnostics
+  description: AI-powered medical image diagnostic system
+  version: 0.1.0
+  debug: true # Changed from false to true
+  secret_key: "51119" # Replace with a strong, unique secret key
+
+# User roles
+roles:
+  - name: doctor
+    permissions: [view, predict, feedback, report, history]
+  - name: reviewer
+    permissions: [view, feedback, history]
+  - name: admin
+    permissions: [view, predict, feedback, report, history, manage_users]
+
+# AI Models configuration
+models:
+  - name: chest-xray
+    type: classification
+    path: models/chest_xray_model.pt
+    labels: ["Pneumonia", "Tuberculosis", "COVID-19", "Normal"]
+    input_size: [224, 224]
+    conf_threshold: 0.5
+  - name: brain-mri
+    type: classification
+    path: models/brain_mri_model.pt
+    labels: ["Tumor", "Normal"]
+    input_size: [256, 256]
+    conf_threshold: 0.6
+
+# XAI settings
+xai:
+  methods:
+    - name: grad-cam
+      default: true
+    - name: shap
+      default: false
+
+# Storage settings
+storage:
+  uploads_dir: uploads
+  outputs_dir: outputs
+  reports_dir: docs/reports
+  max_upload_size_mb: 16
+
+# Database
+database:
+  type: sqlite  # Options: sqlite, postgresql, firebase
+  path: medical_ai.db  # For SQLite
+  # For future PostgreSQL use:
+  # host: localhost
+  # port: 5432
+  # name: medical_ai
+  # user: postgres
+  # password: password
+
+# Authentication
+auth:
+  token_expiry_minutes: 30
+  refresh_token_expiry_days: 7
+  password_min_length: 8
+  
+# Test users (only for development)
+test_users:
+  - username: doctor1
+    email: doctor@example.com
+    password: password123
+    role: doctor
+  - username: admin1
+    email: admin@example.com
+    password: password123
+    role: admin
